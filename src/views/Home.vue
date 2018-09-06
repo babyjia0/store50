@@ -59,7 +59,10 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <!-- <el-main>Main</el-main> -->
+      <el-menu>
+      <router-view></router-view>
+      </el-menu>
     </el-container>
   </el-container>
 </template>
@@ -71,7 +74,14 @@ export default {
     const token = sessionStorage.setItem('token');
     // 判断token是否有值
     if (!token) {
-      this.$message.worning('请先登录');
+      this.$message.warning('请先登录');
+      this.$router.push('/login');
+    }
+  },
+  methods: {
+    handleLogout () {
+      sessionStorage.clear();
+      this.$message.success('退出成功');
       this.$router.push('/login');
     }
   }
@@ -115,7 +125,7 @@ export default {
   .el-main {
     background-color: #E9EEF3;
     color: #333;
-    text-align: center;
+    /* text-align: center; */
   }
 
 </style>
